@@ -1,0 +1,9 @@
+{
+    "/openmrs": {
+      "target": "https://192.168.33.15",
+      "secure": false,
+      "logLevel": "debug",
+      "changeOrigin": true
+    }
+    
+  }

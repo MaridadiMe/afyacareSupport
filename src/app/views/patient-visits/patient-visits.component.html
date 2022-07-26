@@ -1,0 +1,124 @@
+<div class="container-fluid">
+    <div class="">
+        <!-- search filter -->
+        <div class="d-flex mb-2">
+            <input class="form-control mx-1" type="text" name="search" [(ngModel)]="patient_MRN" autocomplete="off" placeholder="&#61442;  Search Patient By MRN">
+
+            <button mat-raised-button color="primary" [disabled]='patient_MRN.length < 5' (click)='getPatientInformationByMRN()'>Search</button>
+        </div>
+    </div>
+
+    <div *ngIf="patients.length > 0 && !manage_patient_visits" class="my-4 shadow-sm">
+        <table mat-table [dataSource]="patients" class="mat-elevation-z8">
+          
+            <!-- Position Column -->
+            <ng-container matColumnDef="No.">
+              <th mat-header-cell *matHeaderCellDef> No. </th>
+              <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+            </ng-container>
+          
+            <!-- Name Column -->
+            <ng-container matColumnDef="Name">
+              <th mat-header-cell *matHeaderCellDef> Name </th>
+              <td mat-cell *matCellDef="let element"> {{element.patientName}} </td>
+            </ng-container>
+          
+            <!-- Weight Column -->
+            <ng-container matColumnDef="Sex">
+              <th mat-header-cell *matHeaderCellDef> Sex </th>
+              <td mat-cell *matCellDef="let element"> {{element.sex}} </td>
+            </ng-container>
+          
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="Identifier">
+              <th mat-header-cell *matHeaderCellDef> Identifier </th>
+              <td mat-cell *matCellDef="let element"> {{element.fileNo}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Action">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element"><button (click)='manage_visits(element)' mat-stroked-button color="accent">Manage Visits</button> </td>
+              </ng-container>
+          
+            <tr mat-header-row *matHeaderRowDef="patientInformationColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: patientInformationColumns;"></tr>
+          </table>
+
+    </div>
+
+    <div *ngIf='manage_patient_visits' class="my-4">
+        <h4>Managing Patient Visits</h4>
+        <div class="bg-white my-4 p-3 shadow">
+            <table>
+                <tr>
+                    <td>
+                        <small class="text-muted">Patient Name</small>
+                        <p>{{patient?.patientName}}</p>
+                    </td>
+                    <td>
+                        <small class="text-muted">Identifier</small>
+                        <p>{{patient?.fileNo}}</p>
+                    </td>
+                    <td>
+                        <small class="text-muted">Sex</small>
+                        <p>{{patient?.sex}}</p>
+                    </td>
+                </tr>
+            </table>  
+        </div>
+
+        <h4>Patient Visits</h4>
+        <div class="bg-white">
+            <table mat-table [dataSource]="patient_visits" class="mat-elevation-z8">
+                <ng-container matColumnDef="No.">
+                  <th mat-header-cell *matHeaderCellDef> No. </th>
+                  <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+                </ng-container>
+              
+                
+                <ng-container matColumnDef="Type">
+                  <th mat-header-cell *matHeaderCellDef> Type </th>
+                  <td mat-cell *matCellDef="let element"> {{element.type}} </td>
+                </ng-container>
+              
+                
+                <ng-container matColumnDef="Date Started">
+                  <th mat-header-cell *matHeaderCellDef> Date Started </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dateStarted}} </td>
+                </ng-container>
+              
+                
+                <ng-container matColumnDef="Date Stopped">
+                  <th mat-header-cell *matHeaderCellDef> Date Stopped </th>
+                  <td mat-cell *matCellDef="let element"> {{element.dateStopped? element.dateStopped: ''}} </td>
+                </ng-container>
+    
+                <ng-container matColumnDef="Status">
+                    <th mat-header-cell *matHeaderCellDef> Status </th>
+                    <td mat-cell *matCellDef="let element" [ngClass]='{"text-success": element.status == "ACTIVE", "text-danger": element.status !== "ACTIVE"}'> {{element.status == 'ACTIVE'? element.status : 'INACTIVE'}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Action">
+                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                    <td mat-cell *matCellDef="let element"> <button (click)='element.status == "ACTIVE"? openDialog(template, element, "close") : openDialog(template, element, "open")' mat-stroked-button [color]='element.status == "ACTIVE"? "warn" : "primary"'> {{element.status == "ACTIVE"? "Close Visit" : "Open Visit"}} </button> </td>
+                </ng-container>
+              
+                <tr mat-header-row *matHeaderRowDef="patientVisitColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: patientVisitColumns;"></tr>
+              </table>
+        </div>
+
+
+        <ng-template #template>
+            <h4>Comment</h4>
+            <input class="form-control my-2" type="text" name="visit_update_reason" [(ngModel)]="visit_action_reason" autocomplete="off" placeholder="">
+
+            <button mat-raised-button color="primary" [disabled]='visit_action_reason.length < 5' (click)='manage_this_visit()'>Continue</button>
+           </ng-template>
+
+        
+    </div>
+</div>
+
+
+

@@ -1,0 +1,33 @@
+
+
+ 
+
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Visits
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul style="list-style: none;">
+        <li class="my-2" routerLink="/patient/visits"> Patient Visits </li>
+                         
+      </ul>
+      
+    </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion>
+    <mat-expansion-panel (opened)="panelOpenState = true"
+                         (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Billing
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <ul style="list-style: none;">
+        <li class="my-2" routerLink="/dashboard/getproduct"> Payment Categories </li>                
+      </ul>
+    </mat-expansion-panel>
+</mat-accordion>
