@@ -25,4 +25,11 @@ export class ManagementService {
   public manageVisit(payload: any): Observable<any> {
     return this.http.post(ApiConstants.management_url + '/patient/manageVisit', payload, {withCredentials: true});
   }
+
+  /**
+   * getPaymentInfoByVisitUuid
+   */
+  public getPaymentInfoByVisitUuid(visitUuid: string): Observable<any[]> {
+    return this.http.get<any[]>(ApiConstants.management_url + '/patient/getPaymentInformation',{params:{'visitUuid': visitUuid}, withCredentials:true})
+  }
 }

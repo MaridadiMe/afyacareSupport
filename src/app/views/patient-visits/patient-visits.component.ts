@@ -33,22 +33,28 @@ export class PatientVisitsComponent implements OnInit, OnDestroy {
   visit_to_manage:  any = {};
   visit_action: string = '';
   visit_action_reason: string = '';
+  visit_bills : any[] = [];
 
   private patients$! : Subscription;
   private visitManage$! : Subscription;
   dialogRef: MatDialogRef<any>;
 
   patientInformationColumns: string[] = ['No.', 'Name', 'Sex', 'Identifier', 'Action'];
-  patientVisitColumns: string[] = ['No.', 'Type', 'Date Started', 'Date Stopped', 'Status', 'Action'];
+  patientVisitColumns: string[] = ['No.', 'Type', 'Date Started', 'Date Stopped', 'Status', 'Visit Action', "Associated Bills"];
+  visitBillsColumns: string[] = ['No.', 'Bill ID', 'Date Ordered', 'Quoted Amount', 'Payable Amount', 'Action'];
 
   manage_patient_visits : boolean = false;
+  view_visit_bills : boolean = false;
 
   getPatientInformationByMRN(){
     this.patients$ = this.managementService.getPatientPatientByMRN(this.patient_MRN).subscribe((response: any)=>{
       this.manage_patient_visits = false;
+      this.view_visit_bills = false;
       this.patients = [];
       if(response.length > 0 && response != 'empty'){
         this.patients = response;
+      }else if(response == 'empty'){
+        this.messageService.displayMessage('success', "No Patient Found With the Given Identifier");
       }
     },
     (error)=>{
@@ -58,6 +64,7 @@ export class PatientVisitsComponent implements OnInit, OnDestroy {
 
   manage_visits(patient){
     this.manage_patient_visits = true;
+    this.view_visit_bills = false;
     this.patient = patient;
     this.patient_visits = patient.patientVisit? patient.patientVisit: [];
   }
@@ -100,6 +107,34 @@ export class PatientVisitsComponent implements OnInit, OnDestroy {
       this.messageService.displayMessage('error', error.message);
     });
     this.dialogRef.close();
+  }
+
+
+  view_associated_bills(visit){
+    this.visit_to_manage = visit;
+    this.visit_bills = [];
+    this.managementService.getPaymentInfoByVisitUuid(visit.visitUuid).subscribe((response: any)=>{
+      if(response.length > 0 && response !== 'empty'){
+        this.view_visit_bills = true;
+        this.visit_bills = response;
+        // for (const sale_quote of response){
+        //   if(sale_quote.otherItem.length > 0){
+        //     this.visit_bills = this.visit_bills.concat(sale_quote.otherItem);
+        //     }
+
+        //   if(sale_quote.pharmaceuticalItem.length > 0){
+        //     this.visit_bills = this.visit_bills.concat(sale_quote.pharmaceuticalItem);
+        //   }
+          
+        // }
+      }else if(response == 'empty'){
+        this.messageService.displayMessage('success', 'No Bills Associated With This Visit');
+      }else{
+        this.messageService.displayMessage('error', "There was an Error Fetching Bills");
+      }
+    }, (error)=>{
+      this.messageService.displayMessage('error', error);
+    });
   }
 
  

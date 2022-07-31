@@ -17,11 +17,12 @@ import { PatientVisitsComponent } from './views/patient-visits/patient-visits.co
 import { AppRoutesModule } from './routes/app-routes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NotificationDialogComponent } from './views/dialogs/notification-dialog/notification-dialog.component';
+import { HttpInterceptorService } from './services/http-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,9 @@ import { NotificationDialogComponent } from './views/dialogs/notification-dialog
     MatProgressBarModule,
     MatDialogModule
   ],
-  providers: [],
+  providers: [
+    {provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

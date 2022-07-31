@@ -17,7 +17,7 @@ export class MessageService {
   public displayMessage(type, message) {
 
     const dialogConfigs = new MatDialogConfig();
-    dialogConfigs.height = '50px';
+    dialogConfigs.height = '70px';
     dialogConfigs.width = '650px';
     dialogConfigs.position = {top: '80px'};
     dialogConfigs.panelClass = 'admitCorpseDialog';
@@ -25,10 +25,10 @@ export class MessageService {
 
     if(type == "success"){
       dialogConfigs.width = '500px';
-      dialogConfigs.panelClass = "success"
+      dialogConfigs.panelClass = ["success", "no-overflow"]
     }else if(type == "error"){
       dialogConfigs.width = '500px';
-      dialogConfigs.panelClass = "error"
+      dialogConfigs.panelClass = ["error", "no-overflow"]
     }
 
      // open the dialog
@@ -36,7 +36,7 @@ export class MessageService {
 
      setTimeout(() => {
        dialogRef.close();
-     }, 5000);
+     }, 4000);
     
   }
 }

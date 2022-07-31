@@ -1,5 +1,6 @@
 export class ApiConstants {
     private static readonly hostUrl: String = localStorage.getItem('host') ? ("https://" + localStorage.getItem('host')) : "";
+    
     public static readonly restws: String = ApiConstants.hostUrl + "/openmrs/ws/rest";
     public static readonly bahmniHome: String = ApiConstants.hostUrl + "/bahmni/home";
     public static readonly restws_v1: String = ApiConstants.hostUrl + "/openmrs/ws/rest/v1";

@@ -1,8 +1,9 @@
 <mat-toolbar color="primary" class="toolbar">
   <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-    <mat-icon>home</mat-icon>
+    <a style="color: #ffffff" href="../home"><mat-icon>home</mat-icon></a>
   </button>
-    <span>Admin</span>
+  
+    <!-- <span>Admin</span> -->
     <span class="toolbar-spacer"></span>
     <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
       <mat-icon>account_circle</mat-icon>
@@ -10,4 +11,7 @@
   </mat-toolbar>
 
   <!-- progress bar -->
-  <!-- <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar> -->
+  <div *ngIf="httpLoaderService.isLoading | async">
+    <mat-progress-bar mode="indeterminate" color="primary"></mat-progress-bar>
+  </div>
+  

@@ -98,10 +98,15 @@
                     <td mat-cell *matCellDef="let element" [ngClass]='{"text-success": element.status == "ACTIVE", "text-danger": element.status !== "ACTIVE"}'> {{element.status == 'ACTIVE'? element.status : 'INACTIVE'}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="Action">
-                    <th mat-header-cell *matHeaderCellDef> Action </th>
+                <ng-container matColumnDef="Visit Action">
+                    <th mat-header-cell *matHeaderCellDef> Visit Action </th>
                     <td mat-cell *matCellDef="let element"> <button (click)='element.status == "ACTIVE"? openDialog(template, element, "close") : openDialog(template, element, "open")' mat-stroked-button [color]='element.status == "ACTIVE"? "warn" : "primary"'> {{element.status == "ACTIVE"? "Close Visit" : "Open Visit"}} </button> </td>
                 </ng-container>
+
+                <ng-container matColumnDef="Associated Bills">
+                  <th mat-header-cell *matHeaderCellDef> Visit Bills </th>
+                  <td mat-cell *matCellDef="let element"> <button (click)="view_associated_bills(element)" mat-stroked-button color="primary"> View </button> </td>
+              </ng-container>
               
                 <tr mat-header-row *matHeaderRowDef="patientVisitColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: patientVisitColumns;"></tr>
@@ -115,9 +120,60 @@
 
             <button mat-raised-button color="primary" [disabled]='visit_action_reason.length < 5' (click)='manage_this_visit()'>Continue</button>
            </ng-template>
-
-        
     </div>
+
+    <!-- bills section -->
+    <div *ngIf='view_visit_bills && visit_bills.length > 0' class="my-4">
+      <h4>Viewing bills For {{ visit_to_manage?.type}} Visit - {{ visit_to_manage?.dateStarted.split(",")[0]}}</h4>
+      
+      <div class="bg-white">
+          <table mat-table [dataSource]="visit_bills" class="mat-elevation-z8">
+              <ng-container matColumnDef="No.">
+                <th mat-header-cell *matHeaderCellDef> No. </th>
+                <td mat-cell *matCellDef="let element; let i = index;"> {{i+1}} </td>
+              </ng-container>
+            
+              
+              <ng-container matColumnDef="Bill ID">
+                <th mat-header-cell *matHeaderCellDef> Bill ID </th>
+                <td mat-cell *matCellDef="let element"> {{element.billId}} </td>
+              </ng-container>
+            
+              
+              <ng-container matColumnDef="Date Ordered">
+                <th mat-header-cell *matHeaderCellDef> Date Ordered </th>
+                <td mat-cell *matCellDef="let element"> {{element.dateOrdered}} </td>
+              </ng-container>
+            
+              
+              <ng-container matColumnDef="Quoted Amount">
+                <th mat-header-cell *matHeaderCellDef> Quoted Amount </th>
+                <td mat-cell *matCellDef="let element"> {{element.quotedAmount}} </td>
+              </ng-container>
+  
+              <ng-container matColumnDef="Payable Amount">
+                  <th mat-header-cell *matHeaderCellDef> Payable Amount </th>
+                  <td mat-cell *matCellDef="let element"> {{element.payableAmount}} </td>
+              </ng-container>
+
+              <ng-container matColumnDef="Action">
+                  <th mat-header-cell *matHeaderCellDef> Action </th>
+                  <td mat-cell *matCellDef="let element"> <button mat-stroked-button color="primary"> View Details </button> </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="visitBillsColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: visitBillsColumns;"></tr>
+            </table>
+      </div>
+
+
+      <ng-template #template>
+          <h4>Comment</h4>
+          <input class="form-control my-2" type="text" name="visit_update_reason" [(ngModel)]="visit_action_reason" autocomplete="off" placeholder="">
+
+          <button mat-raised-button color="primary" [disabled]='visit_action_reason.length < 5' (click)='manage_this_visit()'>Continue</button>
+         </ng-template>
+  </div>
 </div>
 
 

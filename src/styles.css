@@ -3,17 +3,31 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+body{
+    -ms-overflow-style: none; /* for Internet Explorer, Edge */
+    scrollbar-width: none; /* for Firefox */
+    overflow-y: scroll; 
+}
+
+body::-webkit-scrollbar {
+    display: none; /* for Chrome, Safari, and Opera */
+  }
+
 
 /* success for dialog */
 .success .mat-dialog-container{
     background-color: #A3C553;
     color: #ffffff;
-    padding: 10px 24px;
+    overflow: hidden;
 }
 
 /* error for dialog */
 .error .mat-dialog-container{
-    background-color: #D96363;
+    background-color: #E33B5C;
     color: #ffffff;
-    padding: 10px 24px;
+    overflow: hidden;
+}
+
+.no-overflow .mat-dialog-content{
+    overflow: hidden;
 }
