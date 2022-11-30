@@ -1,0 +1,77 @@
+<div class="container-fluid bg-white shadow-sm">
+    <div class="py-3">
+        <h3> Start Application </h3>
+    </div>
+
+    <div class="py-3">
+        <h3> Application type: </h3> 
+
+        <form>
+            <select class="form-select" [formControl]="applicationType" (change)="checkAvailableApplications()">
+                <option [ngValue]="null" disabled>Choose Application Type</option>
+                <option *ngFor="let type of applicationTypes" [ngValue]="type.uuid"> {{ type.type }}</option>
+            </select>            
+        </form>
+    </div>
+
+    <!-- application selection section -->
+    <div class="container-fluid" *ngIf="isApplicationCategorySelected">
+        <div *ngIf="!displayApplications"> 
+            "No applications are currently available for this category, try again later..."
+        </div>
+        <div class="row" *ngIf="displayApplications">
+            <div class="col-md-4 my-3" *ngFor="let app of availableApplications" (click)="selectApplication(app)">
+  
+              <div class="card shadow">
+                <div class="card-body">
+                  <h3 class="overflow-ellipsis fw-bold">{{ app?.institution }} - {{ app?.location }}</h3>
+                  <p>Deadline: {{ app?.deadline}} </p>
+                  <p>Interview: {{ app?.interview}} </p>
+                  <p>Available: {{ app?.available }}</p>
+                  <p>Fee: {{ app?.fee }}</p>
+                </div>
+              </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- confirm application and start application section -->
+    <div class="container-fluid my-3" *ngIf="verifyAndStartApplication && selectedApplication">
+        <h3> Verify and start your application </h3>
+        <div class="p-3">
+            <table class="w-100">
+                <tr>
+                    <td>Institution :  </td>
+                    <td class="fw-bold">{{selectedApplication?.institution}}</td>
+                    <td>Deadline :  </td>
+                    <td class="fw-bold">{{ selectedApplication?.deadline}}</td>
+                </tr>
+                <tr>
+                    <td>Location :  </td>
+                    <td class="fw-bold">{{selectedApplication?.location}}</td>
+                    <td>Type:  </td>
+                    <td class="fw-bold">{{ selectedApplication?.title}}</td>
+                </tr>
+                <tr>
+                    <td>Available slots :  </td>
+                    <td class="fw-bold">{{selectedApplication?.available}}</td>
+                    <td>Application fee:  </td>
+                    <td class="fw-bold">{{ selectedApplication?.fee}}</td>
+                </tr>
+                <tr>
+                    <td>Interview on :  </td>
+                    <td class="fw-bold">{{selectedApplication?.interview}}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="py-3">
+            <button class="btn btn-info"> Start Application </button>
+        </div>
+
+    </div>
+
+
+
+
+</div>

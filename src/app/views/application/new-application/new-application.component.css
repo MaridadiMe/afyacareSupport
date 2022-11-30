@@ -1,0 +1,11 @@
+.form-select{
+    border-radius: 0;
+}
+
+.card:hover {
+    box-shadow: 0 0.5rem 1rem #80cbc4 !important;
+}
+
+td{
+    padding: 5px
+}

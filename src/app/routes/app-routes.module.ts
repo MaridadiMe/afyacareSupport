@@ -1,13 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { PatientVisitsComponent } from '../views/patient-visits/patient-visits.component';
+import { MyApplicationsComponent } from '../views/application/my-applications/my-applications.component';
+import { NewApplicationComponent } from '../views/application/new-application/new-application.component';
+import { ViewApplicationComponent } from '../views/application/view-application/view-application.component';
+import { DashboardComponent } from '../views/dashboard/dashboard.component';
+import { HomeComponent } from '../views/home/home.component';
 
 
 const appRoutes: Routes = [
-  {path: '', component: PatientVisitsComponent},
-  {path:'search', redirectTo: 'patient/visits', pathMatch: 'full'},
-  {path: 'patient/visits', component: PatientVisitsComponent},
-  { path: '**', redirectTo: '/patient/visits' }
+  {path: '', component: HomeComponent},
+  {path:'search', redirectTo: 'home', pathMatch: 'full'},
+  {path: 'home', component: HomeComponent},
+  {path: 'application/new', component: NewApplicationComponent},
+  {path: 'application/:application-uuid', component: ViewApplicationComponent},
+  {path: 'application/myapplications', component: MyApplicationsComponent},
+  {path: '**', redirectTo: '/home' }
   ];
 
 @NgModule({

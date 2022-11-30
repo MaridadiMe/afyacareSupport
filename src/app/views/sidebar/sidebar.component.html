@@ -1,24 +1,59 @@
+<!-- <div class="p-3 bg-light">
+  <h1 class="p-3">Something Here</h1>  
+</div> -->
+
+<div class="bg-light">
+  <ul class="list-unstyled">
+    <li>
+      <a href="#">Something Here</a>
+      <!-- <h1 class="p-3">Something Here</h1>  -->
+    </li>
+    <li><a routerLink="/application/new"><span><button mat-icon-button color="primary" aria-label="Toggle Button">
+      <mat-icon>add</mat-icon>
+    </button></span> New Application </a></li>
+
+    <li><a routerLink="/application/myapplications"><span><button mat-icon-button color="primary" aria-label="Toggle Button">
+      <mat-icon>list</mat-icon>
+    </button></span> My Applications </a></li>
+
+    <li><a routerLink="/payments"><span><button mat-icon-button color="primary" aria-label="Toggle Button">
+      <mat-icon>attach_money</mat-icon>
+    </button></span> Payments </a></li>
+  </ul>
+</div>
+<!-- <div class="">
 
 
- 
-
-<mat-accordion>
+  <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
         <mat-panel-title>
-          Visits
+          Registration
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul style="list-style: none;">
-        <li class="my-2" routerLink="/patient/visits"> Patient Visits </li>
-                         
+        <li class="my-2" routerLink="/registration/new"> New Client </li>                
       </ul>
-      
     </mat-expansion-panel>
-</mat-accordion>
-
-<mat-accordion>
+  </mat-accordion>
+  
+  
+  <mat-accordion>
+      <mat-expansion-panel (opened)="panelOpenState = true"
+                           (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Prescription
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ul style="list-style: none;">
+          <li class="my-2" routerLink=""> Prescribe </li>                
+        </ul>
+      </mat-expansion-panel>
+  </mat-accordion>
+  
+  <mat-accordion>
     <mat-expansion-panel (opened)="panelOpenState = true"
                          (closed)="panelOpenState = false">
       <mat-expansion-panel-header>
@@ -27,7 +62,7 @@
         </mat-panel-title>
       </mat-expansion-panel-header>
       <ul style="list-style: none;">
-        <li class="my-2" routerLink="/dashboard/getproduct"> Payment Categories </li>                
+        <li class="my-2" routerLink=""> Client Bills </li>                
       </ul>
     </mat-expansion-panel>
-</mat-accordion>
+  </mat-accordion></div> -->

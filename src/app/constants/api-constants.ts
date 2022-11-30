@@ -8,4 +8,5 @@ export class ApiConstants {
     public static readonly sql_url: string = ApiConstants.bahmni_core + "/sql";
     public static readonly billing_url: String = ApiConstants.restws_v1 + "/billing";
     public static readonly management_url: String = ApiConstants.restws_v1 + "/api/management";
+    public static readonly system_settings_url: string = ApiConstants.restws_v1 + "/systemsetting";
 }

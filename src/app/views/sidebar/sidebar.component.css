@@ -1,0 +1,17 @@
+.list-unstyled{
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+ul li a {
+    padding: 15px 20px;
+    display: block;
+    border-bottom: 1px solid #669999;
+}
+
+.bg-theme{
+    background-color: #669999;
+}

@@ -23,11 +23,17 @@ body::-webkit-scrollbar {
 
 /* error for dialog */
 .error .mat-dialog-container{
-    background-color: #E33B5C;
+    background-color: #d95757;
     color: #ffffff;
     overflow: hidden;
 }
 
 .no-overflow .mat-dialog-content{
     overflow: hidden;
+}
+
+.overflow-ellipsis{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

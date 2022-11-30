@@ -13,7 +13,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DashboardComponent } from './views/dashboard/dashboard.component';
 import { SidebarComponent } from './views/sidebar/sidebar.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { PatientVisitsComponent } from './views/patient-visits/patient-visits.component';
 import { AppRoutesModule } from './routes/app-routes.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -23,6 +22,10 @@ import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 import { NotificationDialogComponent } from './views/dialogs/notification-dialog/notification-dialog.component';
 import { HttpInterceptorService } from './services/http-interceptor.service';
+import { HomeComponent } from './views/home/home.component';
+import { NewApplicationComponent } from './views/application/new-application/new-application.component';
+import { ViewApplicationComponent } from './views/application/view-application/view-application.component';
+import { MyApplicationsComponent } from './views/application/my-applications/my-applications.component';
 
 @NgModule({
   declarations: [
@@ -30,8 +33,11 @@ import { HttpInterceptorService } from './services/http-interceptor.service';
     HeaderComponent,
     DashboardComponent,
     SidebarComponent,
-    PatientVisitsComponent,
-    NotificationDialogComponent
+    NotificationDialogComponent,
+    HomeComponent,
+    NewApplicationComponent,
+    ViewApplicationComponent,
+    MyApplicationsComponent
   ],
   imports: [
     BrowserModule,
